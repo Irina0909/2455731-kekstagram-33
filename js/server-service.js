@@ -11,6 +11,13 @@ const PICTURES__COUNT = 25;
 const pictureFilter = document.querySelector('.img-filters');
 let loadedPictures = [];
 
+function setLoadedPictures(pictures) {
+  loadedPictures = pictures.slice(0, PICTURES__COUNT);
+}
+
+function getLoadedPictures() {
+  return loadedPictures.slice();
+}
 
 function showErrorMessage() {
   const errorMessageTemplate = document.querySelector('#error').content.querySelector('.error');
@@ -115,8 +122,9 @@ function loadingData(url, onError) {
 
     .then((pictures) => {
       pictureFilter.classList.remove('img-filters--inactive');
-      loadedPictures = pictures.slice(0, PICTURES__COUNT);
-      renderPhotoList(loadedPictures);
+      //loadedPictures = pictures.slice(0, PICTURES__COUNT);
+      setLoadedPictures(pictures);
+      renderPhotoList(getLoadedPictures());
     })
     .catch((err) => {
       onError(err);
@@ -146,4 +154,4 @@ const sendData = (url, body, onSuccess, onError, restoreData) => {
     });
 };
 
-export { loadingData, getErrorMessage, showSuccessMessage, showErrorMessage, sendData, ROUTE, BASE__URL, loadedPictures };
+export { loadingData, getErrorMessage, showSuccessMessage, showErrorMessage, sendData, ROUTE, BASE__URL, getLoadedPictures };
