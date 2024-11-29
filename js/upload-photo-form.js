@@ -97,13 +97,6 @@ const unblockFormElements = () => {
 };
 
 
-/*function clearErrors() {
-  document.querySelectorAll('.pristine-error').forEach((err) => err.parentNode.removeChild(err));
-  document.querySelectorAll('.img-upload__field-wrapper--error').forEach((wrapper) => {
-    wrapper.classList.remove('img-upload__field-wrapper--error');
-  });
-}*/
-
 const setFormSubmit = (onSuccess, onError) => {
 
   uploadForm.addEventListener('submit', (evt) => {
@@ -128,8 +121,6 @@ const setFormSubmit = (onSuccess, onError) => {
 
         unblockSubmitButton();
         unblockFormElements();
-
-        //clearErrors();
       },
       (err) => {
         document.querySelector('.text__hashtags').value = restoreData.hashtagValue;
