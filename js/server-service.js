@@ -1,5 +1,5 @@
 import { renderPhotoList } from './photo-thumbnails';
-import { clearErrors } from './upload-photo-form';
+//import { clearErrors } from './upload-photo-form';
 import { isEscapeKey } from './random-utils';
 const BASE__URL = 'https://32.javascript.htmlacademy.pro/kekstagram';
 const ROUTE = {
@@ -18,6 +18,7 @@ function setLoadedPictures(pictures) {
 function getLoadedPictures() {
   return loadedPictures.slice();
 }
+
 
 function showErrorMessage() {
   const errorMessageTemplate = document.querySelector('#error').content.querySelector('.error');
@@ -75,7 +76,7 @@ function showSuccessMessage() {
 
   const onDocumentClick = function (evt) {
     const messageElement = document.querySelector('[data-id="success-message"]');
-    if (messageElement.contains(evt.target)) {
+    if (messageElement && evt.target === messageElement) {
       removeSuccessMessage();
     }
   };
@@ -122,7 +123,6 @@ function loadingData(url, onError) {
 
     .then((pictures) => {
       pictureFilter.classList.remove('img-filters--inactive');
-      //loadedPictures = pictures.slice(0, PICTURES__COUNT);
       setLoadedPictures(pictures);
       renderPhotoList(getLoadedPictures());
     })
@@ -145,7 +145,7 @@ const sendData = (url, body, onSuccess, onError, restoreData) => {
     })
     .then(() => {
       onSuccess();
-      clearErrors();
+      //clearErrors();
     })
     .catch((err) => {
       if (typeof onError === 'function') {
